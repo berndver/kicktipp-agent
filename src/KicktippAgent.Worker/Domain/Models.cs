@@ -1,4 +1,4 @@
-namespace KicktippMafWorkflow.Worker.Domain;
+namespace KicktippAgent.Worker.Domain;
 
 public record Team(string Name);
 

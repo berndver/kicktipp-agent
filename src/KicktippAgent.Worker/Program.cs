@@ -1,7 +1,7 @@
-using KicktippMafWorkflow.Worker;
-using KicktippMafWorkflow.Worker.Configuration;
-using KicktippMafWorkflow.Worker.Infrastructure;
-using KicktippMafWorkflow.Worker.Interfaces;
+using KicktippAgent.Worker;
+using KicktippAgent.Worker.Configuration;
+using KicktippAgent.Worker.Infrastructure;
+using KicktippAgent.Worker.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -39,7 +39,7 @@ builder.Services.AddHostedService<MatchFetchingWorker>();
 
 var host = builder.Build();
 
-var logger = host.Services.GetRequiredService<ILogger<KicktippMafWorkflow.Worker.Program>>();
+var logger = host.Services.GetRequiredService<ILogger<KicktippAgent.Worker.Program>>();
 var cfg = host.Services.GetRequiredService<IConfiguration>();
 var schedule = host.Services.GetRequiredService<IOptions<ScheduleOptions>>().Value;
 var provider = host.Services.GetRequiredService<IOptions<ProviderOptions>>().Value;
@@ -51,7 +51,7 @@ logger.LogInformation("Group: {Group}, Model: {Model}, Cron: {Cron}, UpcomingWin
 
 await host.RunAsync();
 
-namespace KicktippMafWorkflow.Worker
+namespace KicktippAgent.Worker
 {
     internal partial class Program;
 }

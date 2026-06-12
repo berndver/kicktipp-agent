@@ -4,6 +4,6 @@
     <File Path="README.md" />
   </Folder>
   <Folder Name="/src/">
-    <Project Path="src/KicktippMafWorkflow.Worker/KicktippMafWorkflow.Worker.csproj" />
+    <Project Path="src/KicktippAgent.Worker/KicktippAgent.Worker.csproj" />
   </Folder>
 </Solution>

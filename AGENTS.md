@@ -7,15 +7,15 @@
 ## Build & run
 
 ```bash
-dotnet build src/KicktippMafWorkflow.Worker/
-dotnet run --project src/KicktippMafWorkflow.Worker/
+dotnet build src/KicktippAgent.Worker/
+dotnet run --project src/KicktippAgent.Worker/
 ```
 
 ## Architecture rules
 
-- All code in the single `KicktippMafWorkflow.Worker` project (no multi-project solution yet)
+- All code in the single `KicktippAgent.Worker` project (no multi-project solution yet)
 - **Folder structure**: `Interfaces/`, `Domain/`, `Configuration/`, `Infrastructure/` – root has `Program.cs` and `MatchFetchingWorker.cs`
-- All domain types are in `Domain/Models.cs` under namespace `KicktippMafWorkflow.Worker`
+- All domain types are in `Domain/Models.cs` under namespace `KicktippAgent.Worker`
 - Log messages and comments **must be in English**
 - Interfaces: `IMatchProvider`, `ITipProvider`, `ITipSubmitter` – follow the same pattern for new providers
 - DI registration via `Program.cs` – use `AddKeyedSingleton<Interface, Impl>("key")` for swappable providers, `AddSingleton` for fixed ones, `AddHostedService` for workers

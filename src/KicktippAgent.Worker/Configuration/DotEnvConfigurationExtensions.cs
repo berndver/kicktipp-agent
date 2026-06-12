@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Configuration;
 
-namespace KicktippMafWorkflow.Worker.Configuration;
+namespace KicktippAgent.Worker.Configuration;
 
 public static class DotEnvConfigurationExtensions
 {

@@ -1,13 +1,13 @@
 using System.Globalization;
-using KicktippMafWorkflow.Worker.Domain;
-using KicktippMafWorkflow.Worker.Interfaces;
+using KicktippAgent.Worker.Domain;
+using KicktippAgent.Worker.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 
-namespace KicktippMafWorkflow.Worker.Infrastructure;
+namespace KicktippAgent.Worker.Infrastructure;
 
 public sealed class KicktippMatchProvider : IMatchProvider
 {

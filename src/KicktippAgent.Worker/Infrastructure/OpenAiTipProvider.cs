@@ -1,6 +1,6 @@
-using KicktippMafWorkflow.Worker.Configuration;
-using KicktippMafWorkflow.Worker.Domain;
-using KicktippMafWorkflow.Worker.Interfaces;
+using KicktippAgent.Worker.Configuration;
+using KicktippAgent.Worker.Domain;
+using KicktippAgent.Worker.Interfaces;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using OpenAI;
@@ -8,7 +8,7 @@ using OpenAI.Chat;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace KicktippMafWorkflow.Worker.Infrastructure;
+namespace KicktippAgent.Worker.Infrastructure;
 
 public sealed class OpenAiTipProvider : ITipProvider
 {

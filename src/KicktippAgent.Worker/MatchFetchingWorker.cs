@@ -1,13 +1,13 @@
 using Cronos;
-using KicktippMafWorkflow.Worker.Configuration;
-using KicktippMafWorkflow.Worker.Domain;
-using KicktippMafWorkflow.Worker.Interfaces;
+using KicktippAgent.Worker.Configuration;
+using KicktippAgent.Worker.Domain;
+using KicktippAgent.Worker.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace KicktippMafWorkflow.Worker;
+namespace KicktippAgent.Worker;
 
 public sealed class MatchFetchingWorker : BackgroundService
 {

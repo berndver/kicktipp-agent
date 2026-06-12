@@ -51,7 +51,7 @@ To add a new portal, implement the interface and register it with `AddKeyedSingl
 ## Project Structure
 
 ```
-src/KicktippMafWorkflow.Worker/
+src/KicktippAgent.Worker/
 ├── Interfaces/           # Abstractions (IMatchProvider, ITipProvider, ITipSubmitter)
 ├── Domain/               # Domain models (Team, Match, Tip)
 │   └── Models.cs
@@ -72,7 +72,7 @@ src/KicktippMafWorkflow.Worker/
 
 Configuration is loaded from a `.env` file (local dev) or environment variables (Docker). Section hierarchy uses `__` (double underscore) as separator.
 
-Create `src/KicktippMafWorkflow.Worker/.env`:
+Create `src/KicktippAgent.Worker/.env`:
 
 ```ini
 # Kicktipp credentials
@@ -124,13 +124,13 @@ If `OpenAI:Preprompt` is empty, a built-in default is used (tailored for World C
 ## Run
 
 ```bash
-dotnet run --project src/KicktippMafWorkflow.Worker/
+dotnet run --project src/KicktippAgent.Worker/
 ```
 
 ## Docker
 
 ```bash
-docker build -f src/KicktippMafWorkflow.Worker/Dockerfile -t kicktipp-worker .
+docker build -f src/KicktippAgent.Worker/Dockerfile -t kicktipp-worker .
 docker run --rm kicktipp-worker
 ```
 

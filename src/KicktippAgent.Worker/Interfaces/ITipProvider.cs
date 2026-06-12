@@ -1,6 +1,6 @@
-using KicktippMafWorkflow.Worker.Domain;
+using KicktippAgent.Worker.Domain;
 
-namespace KicktippMafWorkflow.Worker.Interfaces;
+namespace KicktippAgent.Worker.Interfaces;
 
 public interface ITipProvider
 {
