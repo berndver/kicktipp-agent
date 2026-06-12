@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace KicktippMafWorkflow.Worker;
+namespace KicktippMafWorkflow.Worker.Configuration;
 
 public sealed class ScheduleOptions
 {
@@ -18,4 +18,17 @@ public sealed class ProviderOptions
 
     [Required]
     public string TipSubmitter { get; set; } = "kicktipp";
+}
+
+public sealed class OpenAiOptions
+{
+    [Required]
+    public string ApiKey { get; set; } = "";
+
+    public string Model { get; set; } = "gpt-4o";
+
+    /// <summary>
+    /// Custom system prompt. Falls back to built-in default if empty.
+    /// </summary>
+    public string Preprompt { get; set; } = "";
 }

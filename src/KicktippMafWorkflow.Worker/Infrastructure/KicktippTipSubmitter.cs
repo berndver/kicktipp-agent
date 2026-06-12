@@ -1,10 +1,12 @@
+using KicktippMafWorkflow.Worker.Domain;
+using KicktippMafWorkflow.Worker.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 
-namespace KicktippMafWorkflow.Worker;
+namespace KicktippMafWorkflow.Worker.Infrastructure;
 
 public sealed class KicktippTipSubmitter : ITipSubmitter
 {

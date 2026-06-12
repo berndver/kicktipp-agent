@@ -1,4 +1,7 @@
 using Cronos;
+using KicktippMafWorkflow.Worker.Configuration;
+using KicktippMafWorkflow.Worker.Domain;
+using KicktippMafWorkflow.Worker.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;

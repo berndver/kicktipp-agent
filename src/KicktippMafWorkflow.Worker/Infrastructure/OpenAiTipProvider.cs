@@ -1,11 +1,14 @@
-using Microsoft.Extensions.Configuration;
+using KicktippMafWorkflow.Worker.Configuration;
+using KicktippMafWorkflow.Worker.Domain;
+using KicktippMafWorkflow.Worker.Interfaces;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using OpenAI;
 using OpenAI.Chat;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace KicktippMafWorkflow.Worker;
+namespace KicktippMafWorkflow.Worker.Infrastructure;
 
 public sealed class OpenAiTipProvider : ITipProvider
 {
@@ -20,13 +23,13 @@ public sealed class OpenAiTipProvider : ITipProvider
         "Antworte ausschliesslich im YAML-Format mit den Feldern homeGoals (int), awayGoals (int) " +
         "und reasoning (string). Keine Einleitung, kein Markdown-Codeblock, nur reines YAML.";
 
-    private readonly IConfiguration _configuration;
+    private readonly IOptions<OpenAiOptions> _options;
     private readonly ILogger<OpenAiTipProvider> _logger;
     private readonly IDeserializer _yamlDeserializer;
 
-    public OpenAiTipProvider(IConfiguration configuration, ILogger<OpenAiTipProvider> logger)
+    public OpenAiTipProvider(IOptions<OpenAiOptions> options, ILogger<OpenAiTipProvider> logger)
     {
-        _configuration = configuration;
+        _options = options;
         _logger = logger;
         _yamlDeserializer = new DeserializerBuilder()
             .WithNamingConvention(CamelCaseNamingConvention.Instance)
@@ -35,12 +38,11 @@ public sealed class OpenAiTipProvider : ITipProvider
 
     public async Task<Tip> GetTipAsync(Match match, CancellationToken ct = default)
     {
-        var apiKey = _configuration["OpenAI:ApiKey"]
-            ?? throw new InvalidOperationException("OpenAI:ApiKey is not configured");
-        var model = _configuration["OpenAI:Model"] ?? "gpt-4o";
-        var preprompt = string.IsNullOrWhiteSpace(_configuration["OpenAI:Preprompt"])
+        var apiKey = _options.Value.ApiKey;
+        var model = _options.Value.Model;
+        var preprompt = string.IsNullOrWhiteSpace(_options.Value.Preprompt)
             ? DefaultPreprompt
-            : _configuration["OpenAI:Preprompt"];
+            : _options.Value.Preprompt;
 
         var client = new OpenAIClient(apiKey);
         var chat = client.GetChatClient(model);
