@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using TimeWarp.Mediator;
 
 namespace KicktippAgent.Worker;
 
@@ -93,6 +94,10 @@ public sealed class MatchFetchingWorker : BackgroundService
                     tip.HomeGoals, tip.AwayGoals, tip.Reasoning);
 
                 tips.Add(tip);
+
+                await using var scope = _services.CreateAsyncScope();
+                var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
+                await mediator.Publish(new TipCreatedEvent(tip), stoppingToken);
             }
 
             _logger.LogInformation("Submitting {Count} tip(s)...", tips.Count);

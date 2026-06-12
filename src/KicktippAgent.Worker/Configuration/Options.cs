@@ -32,3 +32,12 @@ public sealed class OpenAiOptions
     /// </summary>
     public string Preprompt { get; set; } = "";
 }
+
+public sealed class NtfyOptions
+{
+    public bool Enabled { get; set; } = false;
+
+    public string Topic { get; set; } = "";
+
+    public string Server { get; set; } = "https://ntfy.sh";
+}

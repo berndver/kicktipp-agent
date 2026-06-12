@@ -32,6 +32,14 @@ builder.Services.AddOptions<OpenAiOptions>()
     .Bind(builder.Configuration.GetSection("OpenAI"))
     .ValidateDataAnnotations();
 
+builder.Services.AddOptions<NtfyOptions>()
+    .Bind(builder.Configuration.GetSection("Notification:Ntfy"));
+
+builder.Services.AddMediator(cfg =>
+    cfg.RegisterServicesFromAssemblyContaining<Program>());
+
+builder.Services.AddHttpClient();
+
 builder.Services.AddKeyedSingleton<IMatchProvider, KicktippMatchProvider>("kicktipp");
 builder.Services.AddKeyedSingleton<ITipSubmitter, KicktippTipSubmitter>("kicktipp");
 builder.Services.AddSingleton<ITipProvider, OpenAiTipProvider>();

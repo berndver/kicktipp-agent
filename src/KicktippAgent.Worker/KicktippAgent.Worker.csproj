@@ -20,9 +20,11 @@
     <ItemGroup>
       <PackageReference Include="Cronos" Version="0.10.0" />
       <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.9" />
+      <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.9" />
       <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="10.0.9" />
       <PackageReference Include="OpenAI" Version="2.3.0" />
       <PackageReference Include="Selenium.Support" Version="4.30.0" />
+      <PackageReference Include="TimeWarp.Mediator" Version="13.0.0" />
       <PackageReference Include="YamlDotNet" Version="17.0.0" />
     </ItemGroup>
 
