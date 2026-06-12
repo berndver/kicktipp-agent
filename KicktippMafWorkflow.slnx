@@ -1,0 +1,5 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/KicktippMafWorkflow.Worker/KicktippMafWorkflow.Worker.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,46 @@
+using KicktippMafWorkflow.Worker;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+
+var baseDir = AppContext.BaseDirectory;
+
+var builder = Host.CreateApplicationBuilder(args);
+builder.Environment.ContentRootPath = baseDir;
+
+builder.Configuration
+    .AddDotEnv(Path.Combine(baseDir, ".env"))
+    .AddEnvironmentVariables();
+
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+
+builder.Services.AddOptions<ScheduleOptions>()
+    .Bind(builder.Configuration.GetSection("Schedule"))
+    .ValidateDataAnnotations();
+
+builder.Services.AddOptions<ProviderOptions>()
+    .Bind(builder.Configuration.GetSection("Provider"))
+    .ValidateDataAnnotations();
+
+builder.Services.AddKeyedSingleton<IMatchProvider, KicktippMatchProvider>("kicktipp");
+builder.Services.AddKeyedSingleton<ITipSubmitter, KicktippTipSubmitter>("kicktipp");
+builder.Services.AddSingleton<ITipProvider, OpenAiTipProvider>();
+builder.Services.AddHostedService<MatchFetchingWorker>();
+
+var host = builder.Build();
+
+var logger = host.Services.GetRequiredService<ILogger<Program>>();
+var cfg = host.Services.GetRequiredService<IConfiguration>();
+var schedule = host.Services.GetRequiredService<IOptions<ScheduleOptions>>().Value;
+var provider = host.Services.GetRequiredService<IOptions<ProviderOptions>>().Value;
+logger.LogInformation("Group: {Group}, Model: {Model}, Cron: {Cron}, UpcomingWindow: {Window}, MatchProvider: {Match}, TipSubmitter: {Submitter}",
+    cfg["Kicktipp:GroupName"], cfg["OpenAI:Model"] ?? "gpt-4o",
+    schedule.Cron, schedule.UpcomingWindow,
+    provider.Match, provider.TipSubmitter);
+
+await host.RunAsync();
+
+internal partial class Program;

@@ -1,0 +1,23 @@
+# Credentials
+.env
+
+# Build output
+bin/
+obj/
+
+# IDE
+.vs/
+.idea/
+*.user
+*.suo
+*.DotSettings.user
+
+# NuGet
+*.nupkg
+**/packages/
+
+# OS
+.DS_Store
+Thumbs.db
+
+
