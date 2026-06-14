@@ -39,6 +39,24 @@ Provider__TipSubmitter=kicktipp
 
 If `OpenAI:Preprompt` is empty, a built-in default is used.
 
+## Notifications (optional)
+
+The agent can send push notifications via [ntfy.sh](https://ntfy.sh) or a self-hosted Ntfy server. Notifications are sent on startup, when tips are placed, and on failures.
+
+```ini
+Ntfy__Enabled=true
+Ntfy__Topic=kicktipp_agent
+Ntfy__Server=https://ntfy.sh
+Ntfy__AccessToken=
+```
+
+| Setting | Required | Default | Description |
+|---|---|---|---|
+| `Ntfy:Enabled` | No | `false` | Enable push notifications |
+| `Ntfy:Topic` | No | `kicktipp_agent` | Ntfy topic to publish to |
+| `Ntfy:Server` | No | `https://ntfy.sh` | Ntfy server URL |
+| `Ntfy:AccessToken` | No | – | Access token for protected topics |
+
 ## Run
 
 ```bash

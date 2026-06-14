@@ -37,7 +37,7 @@ public sealed class NtfyOptions
 {
     public bool Enabled { get; set; }
 
-    public string Topic { get; set; } = "kicktip_agent";
+    public string Topic { get; set; } = "kicktipp_agent";
 
     public string? Server { get; set; }
 
