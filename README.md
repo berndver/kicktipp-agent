@@ -13,7 +13,7 @@ Kicktipp__GroupName=your-tipping-group
 Kicktipp__BaseUrl=https://www.kicktipp.de
 
 OpenAI__ApiKey=sk-...
-OpenAI__Model=gpt-4o
+OpenAI__Model=gpt-5.4-mini
 OpenAI__Preprompt=
 
 Schedule__Cron=0 * * * *
@@ -30,7 +30,7 @@ Provider__TipSubmitter=kicktipp
 | `Kicktipp:GroupName` | Yes | – | Tipping group URL slug (e.g. `my-group`) |
 | `Kicktipp:BaseUrl` | No | `https://www.kicktipp.de` | Portal base URL |
 | `OpenAI:ApiKey` | Yes | – | OpenAI API key |
-| `OpenAI:Model` | No | `gpt-4o` | OpenAI model name |
+| `OpenAI:Model` | No | `gpt-5.4-mini` | OpenAI model name |
 | `OpenAI:Preprompt` | No | built-in default | Custom system prompt for the LLM |
 | `Schedule:Cron` | No | `0 * * * *` | Cron expression (when to run) |
 | `Schedule:UpcomingWindow` | No | `24:00` | Look-ahead window in `hh:mm` (e.g. `48:00` = 2 days) |

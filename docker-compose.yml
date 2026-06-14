@@ -9,7 +9,7 @@ services:
       Kicktipp__GroupName: your-tipping-group
       Kicktipp__BaseUrl: https://www.kicktipp.de
       OpenAI__ApiKey: sk-...
-      OpenAI__Model: gpt-4o
+      OpenAI__Model: gpt-5.4-mini
       OpenAI__Preprompt: ""
       Schedule__Cron: "0 * * * *"
       Schedule__UpcomingWindow: "24:00"
