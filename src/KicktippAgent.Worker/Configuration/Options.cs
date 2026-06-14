@@ -35,9 +35,11 @@ public sealed class OpenAiOptions
 
 public sealed class NtfyOptions
 {
-    public bool Enabled { get; set; } = false;
+    public bool Enabled { get; set; }
 
-    public string Topic { get; set; } = "";
+    public string Topic { get; set; } = "kicktip_agent";
 
-    public string Server { get; set; } = "https://ntfy.sh";
+    public string? Server { get; set; }
+
+    public string? AccessToken { get; set; }
 }

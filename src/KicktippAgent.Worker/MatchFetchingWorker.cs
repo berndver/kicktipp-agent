@@ -109,6 +109,10 @@ public sealed class MatchFetchingWorker : BackgroundService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error while fetching matches");
+
+            await using var scope = _services.CreateAsyncScope();
+            var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
+            await mediator.Publish(new WorkerFailedEvent(ex.Message, ex.GetType().Name), CancellationToken.None);
         }
     }
 

@@ -13,15 +13,15 @@ namespace KicktippAgent.Worker.Infrastructure;
 public sealed class OpenAiTipProvider : ITipProvider
 {
     private const string DefaultPreprompt =
-        "Du bist ein Fussball-Tipp-Experte und tippst Spiele der WM 2026. " +
-        "Dein Ziel ist es, die Tipprunde zu gewinnen. Deshalb müssen deine Tipps stets gewissenhaft, " +
-        "durchdacht und datenbasiert sein. Analysiere jede Begegnung anhand der Team-Namen " +
-        "und gib einen fundierten, begründeten Tipp ab. Berücksichtige typische Stärken und " +
-        "Schwächen der Teams, historische Leistungen, die Turniersituation und den Spielort. " +
-        "Wäge Risiken ab und vermeide zu riskante Aussenseitertipps ohne solide Grundlage. " +
-        "Halte deine Begründung kurz (max. 2–3 Sätze). " +
-        "Antworte ausschliesslich im YAML-Format mit den Feldern homeGoals (int), awayGoals (int) " +
-        "und reasoning (string). Keine Einleitung, kein Markdown-Codeblock, nur reines YAML.";
+        "You are a football tipping expert predicting World Cup 2026 matches. " +
+        "Your goal is to win the tipping competition. Your tips must always be diligent, " +
+        "thoughtful, and data-driven. Analyze each match based on the team names " +
+        "and provide a well-founded, reasoned prediction. Consider typical strengths and " +
+        "weaknesses of the teams, historical performance, tournament situation, and venue. " +
+        "Balance risks and avoid overly risky underdog bets without solid reasoning. " +
+        "Keep your reasoning short (max. 2–3 sentences). " +
+        "Respond exclusively in YAML format with the fields homeGoals (int), awayGoals (int), " +
+        "and reasoning (string). No introduction, no markdown code block, just raw YAML.";
 
     private readonly IOptions<OpenAiOptions> _options;
     private readonly ILogger<OpenAiTipProvider> _logger;

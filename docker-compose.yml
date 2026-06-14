@@ -1,0 +1,18 @@
+services:
+  kicktipp-agent:
+    build:
+      context: .
+      dockerfile: src/KicktippAgent.Worker/Dockerfile
+    environment:
+      Kicktipp__Email: your-email@example.com
+      Kicktipp__Password: your-password
+      Kicktipp__GroupName: your-tipping-group
+      Kicktipp__BaseUrl: https://www.kicktipp.de
+      OpenAI__ApiKey: sk-...
+      OpenAI__Model: gpt-4o
+      OpenAI__Preprompt: ""
+      Schedule__Cron: "0 * * * *"
+      Schedule__UpcomingWindow: "24:00"
+      Provider__Match: kicktipp
+      Provider__TipSubmitter: kicktipp
+    restart: unless-stopped
