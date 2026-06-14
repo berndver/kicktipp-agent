@@ -47,22 +47,55 @@ dotnet run --project src/KicktippAgent.Worker/
 
 ## Docker
 
+Pre-built images are available on [GitHub Container Registry](https://github.com/berndver/kicktipp-agent/pkgs/container/kicktipp-agent):
+
 ```bash
-docker build -f src/KicktippAgent.Worker/Dockerfile -t kicktipp-agent .
+docker pull ghcr.io/berndver/kicktipp-agent:latest
+```
+
+Run directly:
+
+```bash
 docker run --rm \
   -e Kicktipp__Email=... \
   -e Kicktipp__Password=... \
+  -e Kicktipp__GroupName=... \
   -e OpenAI__ApiKey=... \
-  kicktipp-agent
+  ghcr.io/berndver/kicktipp-agent:latest
 ```
 
-Or with Docker Compose:
+Or use Docker Compose. Create a `docker-compose.yml`:
+
+```yaml
+services:
+  kicktipp-agent:
+    image: ghcr.io/berndver/kicktipp-agent:latest
+    environment:
+      Kicktipp__Email: your-email@example.com
+      Kicktipp__Password: your-password
+      Kicktipp__GroupName: your-tipping-group
+      Kicktipp__BaseUrl: https://www.kicktipp.de
+      OpenAI__ApiKey: sk-...
+      OpenAI__Model: gpt-5.4-mini
+      OpenAI__Preprompt: ""
+      Schedule__Cron: "0 * * * *"
+      Schedule__UpcomingWindow: "24:00"
+      Provider__Match: kicktipp
+      Provider__TipSubmitter: kicktipp
+    restart: unless-stopped
+```
 
 ```bash
 docker compose up -d
 ```
 
 The image includes Chromium for headless Selenium.
+
+To build the image yourself:
+
+```bash
+docker build -f src/KicktippAgent.Worker/Dockerfile -t kicktipp-agent .
+```
 
 ## Contributing
 
