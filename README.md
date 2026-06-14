@@ -7,21 +7,33 @@ Automated football tipping agent — scrapes [kicktipp.de](https://www.kicktipp.
 Create `src/KicktippAgent.Worker/.env`:
 
 ```ini
+# Kicktipp
 Kicktipp__Email=your-email@example.com
 Kicktipp__Password=your-password
 Kicktipp__GroupName=your-tipping-group
 Kicktipp__BaseUrl=https://www.kicktipp.de
 
+# OpenAI
 OpenAI__ApiKey=sk-...
 OpenAI__Model=gpt-5.4-mini
 OpenAI__Preprompt=
 
+# Schedule
 Schedule__Cron=0 * * * *
 Schedule__UpcomingWindow=24:00
 
+# Provider
 Provider__Match=kicktipp
 Provider__TipSubmitter=kicktipp
+
+# Ntfy notifications (optional)
+Ntfy__Enabled=true
+Ntfy__Topic=kicktipp_agent
+Ntfy__Server=https://ntfy.sh
+Ntfy__AccessToken=
 ```
+
+Configuration is loaded from the `.env` file (local dev) or environment variables (Docker). If `OpenAI:Preprompt` is empty, a built-in default is used. The agent can optionally send push notifications via [ntfy.sh](https://ntfy.sh) or a self-hosted Ntfy server — on startup, when tips are placed, and on failures.
 
 | Setting | Required | Default | Description |
 |---|---|---|---|
@@ -36,22 +48,6 @@ Provider__TipSubmitter=kicktipp
 | `Schedule:UpcomingWindow` | No | `24:00` | Look-ahead window in `hh:mm` (e.g. `48:00` = 2 days) |
 | `Provider:Match` | No | `kicktipp` | Key of the `IMatchProvider` to use |
 | `Provider:TipSubmitter` | No | `kicktipp` | Key of the `ITipSubmitter` to use |
-
-If `OpenAI:Preprompt` is empty, a built-in default is used.
-
-## Notifications (optional)
-
-The agent can send push notifications via [ntfy.sh](https://ntfy.sh) or a self-hosted Ntfy server. Notifications are sent on startup, when tips are placed, and on failures.
-
-```ini
-Ntfy__Enabled=true
-Ntfy__Topic=kicktipp_agent
-Ntfy__Server=https://ntfy.sh
-Ntfy__AccessToken=
-```
-
-| Setting | Required | Default | Description |
-|---|---|---|---|
 | `Ntfy:Enabled` | No | `false` | Enable push notifications |
 | `Ntfy:Topic` | No | `kicktipp_agent` | Ntfy topic to publish to |
 | `Ntfy:Server` | No | `https://ntfy.sh` | Ntfy server URL |
